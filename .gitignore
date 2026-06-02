@@ -1,0 +1,40 @@
+# Generated outputs — not tracked
+outputs/
+!outputs/.gitkeep
+
+# Beam map data — large files, not tracked
+data/maps/*
+!data/maps/.gitkeep
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Common large binary/data formats
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.npy
+*.npz
+*.fits
+*.grd
+*.sav
+*.tar
+*.tar.gz
+*.zip
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+*.swp
+*.swo
+.vscode/
+.idea/
