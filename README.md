@@ -154,7 +154,7 @@ All generated files go in `outputs/` by default. That directory is gitignored. K
 
 ## Notes
 
-- This is a Python translation of the original IDL beam-mapping workflow developed by Brad Johnson. The math has been preserved from the working `plotting_py/` version.
+- This is a Python translation of the original IDL beam-mapping workflow developed by Dr. Bradley Johnson (UVA Astronomy).
 - All scripts resolve paths relative to their own location (via `Path(__file__)`), so they can be run from any working directory.
 - Generated outputs and large beam map data are intentionally not tracked by git. The `.gitignore` excludes `outputs/`, `data/maps/*`, and all `.grd`, `.npz`, `.pdf`, `.png` files.
 - The `data/maps/.gitkeep` and `outputs/.gitkeep` files preserve the directory structure in git without tracking any data.
