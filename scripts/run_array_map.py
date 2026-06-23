@@ -102,8 +102,8 @@ def run_array_map(args):
             mueller_maps_list.append(None)
             continue
 
-        u, v, field_pol1 = read_grd(str(pol1_path))
-        _, _, field_pol2 = read_grd(str(pol2_path))
+        u, v, field_pol1 = read_grd(str(pol1_path), force_units=args.grd_units)
+        _, _, field_pol2 = read_grd(str(pol2_path), force_units=args.grd_units)
         u_last, v_last = u, v
 
         mueller = build_mueller_maps(field_pol1, field_pol2, u, v)
@@ -182,6 +182,9 @@ def main():
     p.add_argument("--maps_dir", required=True)
     p.add_argument("--out", default="array_data.npz")
     p.add_argument("--horn_layout", default=None)
+    p.add_argument("--grd_units", default="auto",
+                   choices=["auto", "rad", "deg"],
+                   help="Coordinate units in .grd files (default: auto-detect from ICOORD)")
     args = p.parse_args()
     run_array_map(args)
 

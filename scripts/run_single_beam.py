@@ -18,6 +18,9 @@ Optional
 --r_tensor FLOAT  Tensor-to-scalar ratio for primordial B-modes (default: 0.1)
 --mask            Mask beam beyond the first null before convolution
 --cutoff_deg F    Mask radius in degrees (default: 3.0)
+--grd_units STR   Coordinate units in .grd files: "auto" (default, reads ICOORD
+                  from header — ICOORD=1 → radians, ICOORD≥2 → degrees),
+                  "rad" (force radians), or "deg" (force degrees).
 
 Outputs
 -------
@@ -169,9 +172,9 @@ def run_single_beam(args):
     out_dir.mkdir(parents=True, exist_ok=True)
 
     print(f"Reading pol1: {args.pol1}")
-    u, v, field_pol1 = read_grd(args.pol1)
+    u, v, field_pol1 = read_grd(args.pol1, force_units=args.grd_units)
     print(f"Reading pol2: {args.pol2}")
-    _, _, field_pol2 = read_grd(args.pol2)
+    _, _, field_pol2 = read_grd(args.pol2, force_units=args.grd_units)
 
     print("Building Mueller maps...")
     mueller = build_mueller_maps(field_pol1, field_pol2, u, v)
@@ -321,6 +324,9 @@ def main():
     p.add_argument("--r_tensor", type=float, default=0.1)
     p.add_argument("--mask", action="store_true")
     p.add_argument("--cutoff_deg", type=float, default=3.0)
+    p.add_argument("--grd_units", default="auto",
+                   choices=["auto", "rad", "deg"],
+                   help="Coordinate units in .grd files (default: auto-detect from ICOORD)")
     args = p.parse_args()
     run_single_beam(args)
 
